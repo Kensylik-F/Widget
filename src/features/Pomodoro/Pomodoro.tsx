@@ -65,10 +65,10 @@ export const TimerWidget = () => {
       {/* Часы и Дата */}
       <motion.div
         animate={mode === 'clock' 
-          ? { top: '50%', left: '50%', translateX: '-50%', translateY: '-50%' } 
+          ? { top: '40%', left: '50%', translateX: '-50%', translateY: '-50%' } 
           : { top: '20px', right: '20px', left: 'auto', translateX: '0%', translateY: '0%' }
         }
-        transition={{ type: 'spring', stiffness: 120 }}
+        transition={{ type: 'tween', stiffness: 120 }}
         className={`absolute ${mode === 'clock' ? 'flex flex-col text-center justify-center items-center' : 'flex flex-row justify-end items-center gap-2'}`}
         onClick={() => setMode('clock')}
       >
