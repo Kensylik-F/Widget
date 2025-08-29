@@ -12,15 +12,10 @@ import {NotesPreview} from './Notes/Notes-preview.tsx';
 
 import {Calendar} from './Calendar/Calendar.tsx';
 import {CalendarPreview} from './Calendar/Calendar-preview.tsx'; 
-
-
-import { Chat } from './Chat/Chat.tsx';
-import { ChatPreview } from './Chat/Chat-preview.tsx';
 export {
     Weather, WeatherPreview,
     TimerWidget,PomodoroPreview,
     ToDo, ToDoPreview,
     Notes, NotesPreview,
-    Calendar, CalendarPreview,
-    Chat,ChatPreview
+    Calendar, CalendarPreview
 }

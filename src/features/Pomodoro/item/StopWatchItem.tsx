@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 
 export const StopWatch = () => {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(0); // time in milliseconds
   const [isRunning, setIsRunning] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [laps, setLaps] = useState<number[]>([]);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isRunning) {
@@ -25,9 +26,14 @@ export const StopWatch = () => {
     return `${minutes}:${seconds}.${milliseconds}`;
   };
 
+  const handleLap = () => {
+    setLaps([time, ...laps]);
+  };
+
   const handleReset = () => {
     setIsRunning(false);
     setTime(0);
+    setLaps([]);
   };
 
   return (
@@ -40,9 +46,23 @@ export const StopWatch = () => {
         ) : (
           <button onClick={() => setIsRunning(false)} className=" text-black px-4 py-2 rounded-xl">Pause</button>
         )}
+        <button onClick={handleLap} className=" text-black px-4 py-2 rounded-xl" disabled={!isRunning}>Lap</button>
         <button onClick={handleReset} className=" text-black px-4 py-2 rounded-xl">Reset</button>
       </div>
 
+      {laps.length > 0 && (
+        <div className="w-full max-w-xs mt-4">
+          <div className="text-xs font-bold uppercase mb-2">Laps</div>
+          <div className="overflow-y-auto max-h-40">
+            {laps.map((lap, index) => (
+              <div key={index} className="flex justify-between text-sm py-1 border-b">
+                <span>Lap {laps.length - index}</span>
+                <span>{formatTime(lap)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
